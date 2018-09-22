@@ -118,7 +118,9 @@ plot(uppqnt ~ samp_size, data = vole_samp_sin_uppqnt)
 
 sd_uppqnt_sample <- vole_samp_sin_uppqnt %>%
   group_by(samp_size) %>%
-  summarize(sd(uppqnt))
+  summarize(sd_up_qnt = sd(uppqnt), ave_upp_quant = mean(uppqnt)) %>%
+  ungroup()
+sd_uppqnt_sample
 
 #4b. What does this value, the standard error of the upper quartile, mean?
 
@@ -127,9 +129,11 @@ sd_uppqnt_sample <- vole_samp_sin_uppqnt %>%
 
 #4c. What is the CI of the upper quartile with a sample size of 10. What does this mean?
 
-vole_samp_sin_uppqnt
-####sample size 10 upper quartile = 80.8
-confint(vole_samp_sin_uppqnt, n = 10)
+SE_sample_10 <- sd_uppqnt_sample[6,2]
+SE_sample_10
+Confidence_Int_sample_10 <- SE_sample_10*1.96
+Confidence_Int_sample_10
+#The CI of the upper quartile is sample 10 is 23.21368
 
 ####the confidence interval means that there is a 95% chance the value lies within that range.
 
